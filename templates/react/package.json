@@ -1,6 +1,6 @@
 {
-  "name": "jcube-react",
-  "version": "1.0.0",
+  "name": "{{projectName}}",
+  "version": "{{projectVersion}}",
   "description": "",
   "main": "index.js",
   "scripts": {

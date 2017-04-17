@@ -37,7 +37,7 @@ module.exports = merge(baseWebpackConfig, {
                             }
                         }
                     }
-                ],
+                ]
             },
             {
                 test: /\.scss$/,
