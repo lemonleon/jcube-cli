@@ -11,7 +11,7 @@ const generate = require('../lib/generate');
 
 program
   .usage('<dependence> [project-name]')
-  .description('create a new project')
+  .description('create a new project');
   //.parse(process.argv);
 
 
@@ -19,16 +19,16 @@ program
  * Help
  */
 program.on('--help', function () {
-  console.log('  Examples:')
-  console.log()
-  console.log('    # create a new project')
-  console.log('    $ jcube init my-project')
+  console.log('  Examples:');
+  console.log();
+  console.log('    # create a new project');
+  console.log('    $ jcube init my-project');
   console.log()
 
 });
 
 function help () {
-  program.parse(process.argv)
+  program.parse(process.argv);
   if (program.args.length < 1) return program.help()
 }
 help();
@@ -66,7 +66,6 @@ function run(){
             if(!err)
                 console.log(chalk.green('      Generated ' + projectName + '!'));
                 console.log(chalk.green('      Happy coding!'));
-
         });
     })
 }
