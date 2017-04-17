@@ -1,0 +1,22 @@
+#desc{
+    width: 200px;
+    margin: 20px auto;
+    display: flex;
+    h2{
+        width: 100%;
+        height: 30px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 30px;
+    }
+    a{
+        display: flex;
+        flex: 1;
+        height: 66px;
+        align-items: center;
+        font-size: 22px;
+        color: #399;
+        justify-content: center;
+    }
+}

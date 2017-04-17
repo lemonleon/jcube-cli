@@ -1,0 +1,22 @@
+#jcube{
+    display: flex;
+    width: 124px;
+    height: 58px;
+    margin: 66px auto;
+    background: url(i/jcube-logo.png) no-repeat center center;
+}
+
+#app{
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#btn{
+    display: block;
+    background: #fff;
+    border: 1px solid coral;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 auto;
+}
