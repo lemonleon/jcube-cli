@@ -1,6 +1,6 @@
 ### INSTALL
 ```bash
-    npm install -g jcube
+    npm install -g jcube-cli
 ```
 
 ### USAGE
