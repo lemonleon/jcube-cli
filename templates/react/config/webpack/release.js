@@ -51,16 +51,17 @@ buildFileList.forEach(function (item, index){
             if(isExists){   //后续更新
                 hotBuild(buildHash, function (diff){
                     if(diff.length){
+                        diff.forEach(function (item, index){
+                            console.log(`     ${chalk.magenta('----------------------')}  ${chalk.red(index+1)}  ${chalk.magenta('----------------------')}`);
+                            console.log(`     ${chalk.yellow('  filename:   ')} ${chalk.green(item.file)}`);
+                            console.log(`     ${chalk.yellow('beforeHash:   ')} ${chalk.green(item.beforeHash)}`);
+                            console.log(`     ${chalk.yellow('  afterHsh:   ')} ${chalk.green(item.afterHsh)}`);
+                            console.log(`     ${chalk.yellow('lastModify:   ')} ${chalk.green(item.lastModify)}`);
+                        });
+
                         console.log(' ');
                         console.log(`     ${chalk.cyan(`update files: ${diff.length}`)}  ${chalk.white('>>')}  ${chalk.cyan(`uptate time: ${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}`)}`);
                         console.log(' ');
-                        diff.forEach(function (item, index){
-                            console.log(`     ${chalk.magenta('----------------------')}  ${chalk.red(index+1)}  ${chalk.magenta('----------------------')}`);
-                            console.log(`     ${chalk.yellow('filename:   ')} ${chalk.green(item.file)}`);
-                            console.log(`     ${chalk.yellow('beforeHash: ')} ${chalk.green(item.beforeHash)}`);
-                            console.log(`     ${chalk.yellow('afterHsh:   ')} ${chalk.green(item.afterHsh)}`);
-                            console.log(`     ${chalk.yellow('lastModify: ')} ${chalk.green(item.lastModify)}`);
-                        });
                     }
                     else{
                         console.log(' ');
@@ -76,11 +77,6 @@ buildFileList.forEach(function (item, index){
     }
     run(gen);
 });
-
-//1. 生成build目录下的hash表
-//2. 跟release下的hash表进行对比
-//3. 复制并替换差异文件到release目录下
-
 
 /**
  * Load file.
@@ -110,9 +106,27 @@ function firstBuild(buildHash){
         cp('./hashMap/build-manifest.json', './hashMap/release-manifest.json');
     });
     //复制静态资源到release目录下
-    cp('-R', './build/css/', './testRelease/');
-    cp('-R', './build/js/', './testRelease/');
-    
+    mkdir('./testRelease')  //https://github.com/shelljs/shelljs/issues/705
+    cp('-r', './build/js', './testRelease/');
+    cp('-r', './build/dll', './testRelease/');
+    cp('-r', './build/css', './testRelease/');
+
+    var count = 0;
+    ls('-R','./testRelease').forEach(function(file, index) {
+        var stat = fs.statSync('./testRelease/'+file);
+        
+        if(stat.isFile()){
+            count++;
+            console.log(`     ${chalk.magenta('----------------------')}  ${chalk.red(count)}  ${chalk.magenta('----------------------')}`);
+            console.log(`     ${chalk.yellow('  filename:   ')} ${chalk.green(file)}`);
+            console.log(`     ${chalk.yellow('      hash:   ')} ${chalk.green(buildHash['./build/'+file].hash)}`);
+            console.log(`     ${chalk.yellow('lastModify:   ')} ${chalk.green(buildHash['./build/'+file].lastModify)}`);
+        }
+    });
+
+    console.log(' ');
+    console.log(`     ${chalk.cyan(`update files: ${count}`)}  ${chalk.white('>>')}  ${chalk.cyan(`uptate time: ${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}`)}`);
+    console.log(' ');
 }
 
 /**

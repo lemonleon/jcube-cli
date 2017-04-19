@@ -7,7 +7,7 @@ const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
 const opn = require('opn');
-const webpackConfig = require('./webpack.dev.config');
+const webpackConfig = require('./webpack.dev.conf');
 
 var port = process.env.PORT || config.dev.port;
 

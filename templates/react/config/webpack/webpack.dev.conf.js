@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const config = require('./settings/config');
-const baseWebpackConfig = require('./webpack.base.config');
+const baseWebpackConfig = require('./webpack.base.conf');
 const vendorDLLConfig = require('../../app/dll/vendor.dll.config.json');
 
 Object.keys(baseWebpackConfig.entry).forEach(function (name){
@@ -37,7 +37,7 @@ module.exports = merge(baseWebpackConfig, {
                             }
                         }
                     }
-                ]
+                ],
             },
             {
                 test: /\.scss$/,
@@ -77,21 +77,15 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.HotModuleReplacementPlugin(),
         //用来跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
         new webpack.NoEmitOnErrorsPlugin(),
-        //提取CSS模块
-        // new ExtractTextPlugin({
-        //     filename: 'css/[name].boundle.css',
-        //     disable: false,
-        //     allChunks: true
-        // }),
         //dll引用
-        // new webpack.DllReferencePlugin({
-        //     context: './',
-        //     manifest: require('../../app/dll/vendor-manifest.json')
-        // }),
+        new webpack.DllReferencePlugin({
+            context: './',
+            manifest: require('../../app/dll/vendor-manifest.json')
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'app/html/index.html',
-            //vendorDLL: '/static/dll/'+vendorDLLConfig.vendor.js,
+            vendorDLL: '/static/dll/'+vendorDLLConfig.vendor.js,
             inject: true
         }),
         new FriendlyErrorsPlugin()

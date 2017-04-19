@@ -9,7 +9,7 @@ const chalk = require('chalk');
 const rm = require('rimraf')
 
 const config = require('./settings/config');
-const webpackConfig = require('./webpack.prod.config');
+const webpackConfig = require('./webpack.prod.conf');
 
 var assetsPath = config.prod.outputPath;
 var spinner = ora('building for production...');
@@ -22,9 +22,6 @@ rm(assetsPath, err => {
         spinner.stop()
 
         if (err) throw err
-
-        //Delete the DLL generated JSON file (this file only needs to be used in the webpack build)
-        //rm('-f', `${assetsPath}/dll/*.json`);
 
         process.stdout.write(stats.toString({
             colors: true,

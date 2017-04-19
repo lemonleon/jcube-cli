@@ -3,10 +3,11 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = require('./settings/config');
-const baseWebpackConfig = require('./webpack.base.config');
+const baseWebpackConfig = require('./webpack.base.conf');
 const env = config.prod.env;
 const vendorDLLConfig = require('../../static/dll/vendor.dll.config.json');
 
@@ -18,7 +19,7 @@ const vendorDLLConfig = require('../../static/dll/vendor.dll.config.json');
 module.exports = merge(baseWebpackConfig, {
     devtool: false,
     output: {
-        //publicPath: config.prod.assetsPublicPath,
+        publicPath: config.prod.publicPath,
         path: config.prod.outputPath,
         chunkFilename: 'js/chunk-[name].js'
     },
@@ -81,26 +82,26 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': env
         }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'vendor',
-        //     minChunks: function (module, count) {
-        //         // any required modules inside node_modules are extracted to vendor
-        //         return (
-        //             module.resource &&
-        //             /\.js$/.test(module.resource) &&
-        //             module.resource.indexOf(
-        //                 path.join(__dirname, '../node_modules')
-        //             ) === 0
-        //         )
-        //     }
-        // }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function (module, count) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js$/.test(module.resource) &&
+                    module.resource.indexOf(
+                        path.join(__dirname, '../node_modules')
+                    ) === 0
+                )
+            }
+        }),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: 'html/index.html',
             template: 'app/html/index.html',
             vendorDLL: config.prod.publicPath+'/dll/'+vendorDLLConfig.vendor.js
         }),
@@ -111,8 +112,12 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new ExtractTextPlugin({
             filename: 'css/[name].boundle.css',
-            //disable: false,
             allChunks: true
+        }),
+        new OptimizeCSSPlugin({
+            cssProcessorOptions: {
+                safe: true
+            }
         }),
         new CopyWebpackPlugin([
             {

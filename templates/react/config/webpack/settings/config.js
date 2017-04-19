@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     prod: {
         env: {NODE_ENV: '"production"'},
-        publicPath: '/abc',
+        publicPath: '/static',
         outputPath: path.resolve('./', 'build')
     },
     dev: {
