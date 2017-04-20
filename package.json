@@ -1,6 +1,6 @@
 {
   "name": "jcube-cli",
-  "version": "0.1.8",
+  "version": "0.2.2",
   "description": "A simple CLI for scaffolding Vue、React projects.",
   "main": "",
   "bin": {
@@ -16,6 +16,7 @@
     "handlebars": "^4.0.6",
     "inquirer": "^3.0.6",
     "metalsmith": "^2.3.0",
+    "moment": "^2.18.1",
     "request": "^2.81.0",
     "semver": "^5.3.0"
   },
