@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 console.log(`React: ${React}`);
@@ -44,9 +44,9 @@ document.getElementById('btn').onclick = function (){
     }
 
     let async1 = async function () {
-        var data1 = await querySql(111);
+        var data1 = await querySql('a');
         console.log(data1);
-        var data2 = await querySql(222);
+        var data2 = await querySql('b');
         console.log(data2);
     };
 

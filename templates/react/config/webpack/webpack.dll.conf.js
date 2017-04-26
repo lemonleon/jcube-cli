@@ -5,10 +5,10 @@ const AssetsWebpackPlugin = require('assets-webpack-plugin');
 
 const env = argv.env;
 
-var dllPath = env == 'dev' ? 'app/dll' : 'static/dll';
+var dllPath = env == 'dev' ? 'app/dll' : '\.jcube/dll';
 
 function dllConf(type){
-    var dllPath = env == 'dev' ? 'app/dll' : 'static/dll';
+    var dllPath = env == 'dev' ? 'app/dll' : '\.jcube/dll';
     var dllPlugins = env == 'dev' ?
     [   //dev
         new webpack.DllPlugin({
@@ -21,6 +21,11 @@ function dllConf(type){
         })
     ] : 
     [   //prod
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.DllPlugin({
             path: path.join('./', dllPath, 'vendor-manifest.json'),
             name: '[name]_library'

@@ -9,12 +9,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const config = require('./settings/config');
 const baseWebpackConfig = require('./webpack.base.conf');
 const env = config.prod.env;
-const vendorDLLConfig = require('../../static/dll/vendor.dll.config.json');
-
-/**
- * publicPath： 1. html自动插入引用（link、script）的地方加上CND地址
- *              2. css文件里的url引用也会自动加上CND地址
- */
+const vendorDLLConfig = require('../../\.jcube/dll/vendor.dll.config.json');
 
 module.exports = merge(baseWebpackConfig, {
     devtool: false,
@@ -73,7 +68,7 @@ module.exports = merge(baseWebpackConfig, {
                 loader: 'url-loader',
                 query: {
                     limit: 1,
-                    name: '/css/[name].[ext]'
+                    name: '/css/i/[name].[ext]'
                 }
             }
         ]
@@ -103,12 +98,11 @@ module.exports = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: 'html/index.html',
             template: 'app/html/index.html',
-            vendorDLL: config.prod.publicPath+'/dll/'+vendorDLLConfig.vendor.js
+            vendorDLL: config.prod.publicPath+'dll/'+vendorDLLConfig.vendor.js
         }),
-        //dll引用
         new webpack.DllReferencePlugin({
             context: './',
-            manifest: require('../../static/dll/vendor-manifest.json')
+            manifest: require('../../\.jcube/dll/vendor-manifest.json')
         }),
         new ExtractTextPlugin({
             filename: 'css/[name].boundle.css',
@@ -121,10 +115,14 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CopyWebpackPlugin([
             {
-                from: path.resolve('./', 'static/dll'),
+                from: path.resolve('./', '\.jcube/dll'),
                 to: config.prod.outputPath+'/dll',
                 ignore: ['*.json']
-            }
+            }/*,
+            {
+                from: path.resolve('./', 'app/data'),
+                to: config.prod.outputPath+'/data'
+            }*/
         ])
     ]
 });

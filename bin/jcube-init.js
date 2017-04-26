@@ -11,7 +11,8 @@ const generate = require('../lib/generate');
 
 program
   .usage('<dependence> [project-name]')
-  .description('create a new project');
+  .description('create a new project')
+  .option('-v, --projectVersion [project-version]', 'project version');
   //.parse(process.argv);
 
 
@@ -33,16 +34,14 @@ function help () {
 }
 help();
 
-
 /**
  * Settings
  */
 var dependence = program.args[0];
 var projectName = program.args[1];
-var to = path.resolve(projectName || '.');
+var projectVersion = program.projectVersion;
+var to = projectVersion ? path.resolve(projectName+'/'+projectVersion || '.') : path.resolve(projectName || '.');
 var template = path.resolve(__dirname, '../templates', dependence);
-
-
 
 if(fs.existsSync(to)){
     inquirer.prompt([{
@@ -62,7 +61,7 @@ else{
 
 function run(){
     checkVersion(function (){
-        generate(template, to, function (err){
+        generate(template, to, projectVersion, function (err){
             if(!err)
                 console.log(chalk.green('      Generated ' + projectName + '!'));
                 console.log(chalk.green('      Happy coding!'));

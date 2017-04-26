@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --config config/webpack/webpack.dll.conf.js --env dev --hide-modules && node config/webpack/dev-server.js",
     "build": "webpack --config config/webpack/webpack.dll.conf.js --env prod --hide-modules && node config/webpack/build.js",
-    "release": "node ./config/webpack/release.js"
+    "release": "node ./config/webpack/release.js",
+    "dll": "webpack --config config/webpack/webpack.dll.conf.js --env prod"
   },
   "author": "lemonleon",
   "license": "MIT",
