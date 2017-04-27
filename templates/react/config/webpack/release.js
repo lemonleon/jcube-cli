@@ -158,7 +158,7 @@ function hotBuild(buildHash, cb){
         
         //2. diff
         for(var file in buildHash){
-            if(isReleaseFile(file) && releaseHash[file].hash !== buildHash[file].hash){
+            if(isReleaseFile(file) && (!releaseHash[file] || releaseHash[file].hash !== buildHash[file].hash)){
                 var target = file.replace(/\.\/build\//gi, '');
 
                 diff.push({
