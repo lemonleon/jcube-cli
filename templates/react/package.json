@@ -1,7 +1,7 @@
 {
   "name": "{{projectName}}",
   "version": "{{projectVersion}}",
-  "description": "",
+  "description": "{{projectDesc}}",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --config config/webpack/webpack.dll.conf.js --env dev --hide-modules && node config/webpack/dev-server.js",
@@ -9,7 +9,7 @@
     "release": "node ./config/webpack/release.js",
     "dll": "webpack --config config/webpack/webpack.dll.conf.js --env prod"
   },
-  "author": "lemonleon",
+  "author": "{{{ author }}}",
   "license": "MIT",
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",

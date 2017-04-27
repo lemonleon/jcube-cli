@@ -61,10 +61,18 @@ else{
 
 function run(){
     checkVersion(function (){
-        generate(template, to, projectVersion, function (err){
+        generate(template, to, projectName, projectVersion, function (err){
             if(!err)
-                console.log(chalk.green('      Generated ' + projectName + '!'));
-                console.log(chalk.green('      Happy coding!'));
+                console.log(' ');
+                console.log(`   jcube-cli · Generated "${projectName}".`);
+                console.log(' ');
+                console.log('   To get started:');
+                console.log(' ');
+                console.log(`     cd ${projectVersion ? projectName+'/'+projectVersion : projectName}`);
+                console.log('     npm install');
+                console.log('     npm run dev');
+                console.log(' ');
+                console.log(chalk.green('   Happy coding ^_^'));
         });
     })
 }

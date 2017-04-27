@@ -1,12 +1,24 @@
 {
   "name": "jcube-cli",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "A simple CLI for scaffolding Vue、React projects.",
   "main": "",
   "bin": {
     "jcube": "./bin/jcube.js"
   },
-  "author": "lemonleon",
+  "author": "lemonleon <msupercoder@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/lemonleon/jcube-cli/issues"
+  },
+  "homepage": "https://github.com/lemonleon/jcube-cli#readme",
+  "keywords": [
+    "jcube",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonleon/jcube-cli.git"
+  },
   "license": "MIT",
   "dependencies": {
     "async": "^2.3.0",
