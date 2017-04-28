@@ -1,7 +1,7 @@
 {
   "name": "jcube-cli",
-  "version": "0.3.0",
-  "description": "A simple CLI for scaffolding Vue、React projects.",
+  "version": "0.3.3",
+  "description": "A simple set of scaffolding that supports Vue、React、ordinary projects.",
   "main": "",
   "bin": {
     "jcube": "./bin/jcube.js"
@@ -13,6 +13,8 @@
   "homepage": "https://github.com/lemonleon/jcube-cli#readme",
   "keywords": [
     "jcube",
+    "react",
+    "vue",
     "cli"
   ],
   "repository": {

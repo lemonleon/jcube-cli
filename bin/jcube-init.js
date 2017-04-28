@@ -10,7 +10,7 @@ const checkVersion = require('../lib/check-version');
 const generate = require('../lib/generate');
 
 program
-  .usage('<dependence> [project-name]')
+  .usage('<dependence> [project-name] [options]')
   .description('create a new project')
   .option('-v, --projectVersion [project-version]', 'project version');
   //.parse(process.argv);
@@ -23,7 +23,7 @@ program.on('--help', function () {
   console.log('  Examples:');
   console.log();
   console.log('    # create a new project');
-  console.log('    $ jcube init my-project');
+  console.log('    $ jcube init react my-project');
   console.log()
 
 });
