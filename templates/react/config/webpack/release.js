@@ -209,7 +209,6 @@ function isReleaseFile(_path){
     var extJson = {
         ".html": false,
         ".json": false,
-        ".doc": false,
         ".md": false,
         ".doc": false,
         ".docx": false,
