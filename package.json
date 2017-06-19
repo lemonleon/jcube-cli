@@ -1,6 +1,6 @@
 {
   "name": "jcube-cli",
-  "version": "0.3.8",
+  "version": "0.3.15",
   "description": "A simple set of scaffolding that supports Vue、React、ordinary projects.",
   "main": "",
   "bin": {

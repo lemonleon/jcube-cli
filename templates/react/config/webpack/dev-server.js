@@ -30,7 +30,7 @@ compiler.plugin('compilation', function (compilation){
     });
 });
 
-app.use(require('connect-history-api-fallback')())
+app.use(require('connect-history-api-fallback')());
 
 app.use(devMiddleware);
 
@@ -39,30 +39,18 @@ app.use(hotMiddleware);
 app.use('/static', express.static('./app'));
 
 var uri = 'http://localhost:' + port;
-// devMiddleware.waitUntilValid(function () {
-//   console.log('> Listening at ' + url + '\n')
-// })
 
-// module.exports = app.listen(port, function (err) {
-//     if(err){
-//         console.log(err);
-//         return false;
-//     }
-    
-//     opn(url);
-// });
-
-var _resolve
+var _resolve;
 var readyPromise = new Promise(resolve => {
   _resolve = resolve
-})
+});
 
-console.log('> Starting dev server...')
+console.log('> Starting dev server...');
 devMiddleware.waitUntilValid(() => {
-  console.log('> Listening at ' + uri + '\n')
+  console.log('> Listening at ' + uri + '\n');
   
-  opn(uri)
+  opn(uri);
   _resolve()
-})
+});
 
-var server = app.listen(port)
+var server = app.listen(port);

@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -64,7 +65,7 @@ module.exports = merge(baseWebpackConfig, {
                 loader: 'url-loader',
                 query: {
                     limit: 1,
-                    name: '/css/[name].[ext]'
+                    name: '/css/i/[name].[ext]'
                 }
             }
         ]
@@ -77,6 +78,19 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.HotModuleReplacementPlugin(),
         //用来跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function (module, count) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js$/.test(module.resource) &&
+                    module.resource.indexOf(
+                        path.join(__dirname, '../../node_modules')
+                    ) === 0
+                )
+            }
+        }),
         //dll引用
         new webpack.DllReferencePlugin({
             context: './',
