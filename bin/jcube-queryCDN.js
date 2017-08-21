@@ -9,8 +9,8 @@ const fs = require('fs');
 
 program
     .usage('[url]')
-    .description('query url last modified')
-    .parse(process.argv);
+    .description('query url last modified');
+    //.parse(process.argv);
 
 /**
  * Help
@@ -22,6 +22,11 @@ program.on('--help', function () {
     console.log('    $ jcube queryCDN [url]');
     console.log()
 });
+function help () {
+    program.parse(process.argv);
+    if (program.args[0] == '-h' || program.args[0] == '--help') return program.help()
+}
+help();
 
 var currentPath = path.resolve('.');
 var baseFile = JSON.parse(loadFile(path.resolve('./\.jcube/release/releaseFiles.base.json')));
