@@ -1,6 +1,6 @@
 # jcube-cli
 
-[![npm](https://img.shields.io/badge/npm-0.4.3-orange.svg)](https://www.npmjs.com/package/jcube-cli)
+[![npm](https://img.shields.io/badge/npm-0.4.5-orange.svg)](https://www.npmjs.com/package/jcube-cli)
 [![node](https://img.shields.io/badge/node-%3E%3D4.0.0-blue.svg)](https://nodejs.org/en/)
 
 Jcube-cli is a simple set of scaffolding that supports Vue、React、ordinary projects.

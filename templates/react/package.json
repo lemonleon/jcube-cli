@@ -49,6 +49,7 @@
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.18.2",
+    "webpack-merge": "^2.6.1",
     "yargs": "^7.0.2",
     "gulp-util": "^3.0.8",
     "vinyl-fs": "^2.4.4",
